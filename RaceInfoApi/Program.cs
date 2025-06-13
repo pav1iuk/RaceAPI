@@ -1,15 +1,38 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using RaceInfoApi.Application.Services;
+using RaceInfoApi.Application.Services.Interfaces;
+using RaceInfoApi.Infrastructure.Data;
+using RaceInfoApi.Infrastructure.Interfaces;
+using RaceInfoApi.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Тут реєструємо сервіси
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IRaceService, RaceService>();
+builder.Services.AddScoped<IDriverRepository, DriverRepository>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IRaceResultRepository, RaceResultRepository>();
+builder.Services.AddScoped<IRaceResultService, RaceResultService>();
+
+// Реєстрація DbContext — сюди вставляємо
+builder.Services.AddDbContext<RaceDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Можна додати Swagger, CORS, інші сервіси
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Налаштування middleware (приклад для Swagger)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
