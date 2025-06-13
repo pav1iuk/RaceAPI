@@ -8,28 +8,39 @@ namespace RaceInfoApi.Controller
     [Route("api/[controller]")]
     public class DriversController : ControllerBase
     {
-        private readonly IDriverService _driverService;
+        private readonly IDriverService _service;
 
-        public DriversController(IDriverService driverService)
+        public DriversController(IDriverService service)
         {
-            _driverService = driverService;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DriverDto>>> GetAll()
-        {
-            var drivers = await _driverService.GetAllDriversAsync();
-            return Ok(drivers);
-        }
+        public async Task<IActionResult> GetAll() => Ok(await _service.GetAllAsync());
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<DriverDetailsDto>> GetById(int id)
-        {
-            var driver = await _driverService.GetDriverDetailsAsync(id);
-            if (driver == null)
-                return NotFound();
+        public async Task<IActionResult> Get(int id) => Ok(await _service.GetByIdAsync(id));
 
-            return Ok(driver);
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] DriverDto dto)
+        {
+            await _service.CreateAsync(dto);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] DriverDto dto)
+        {
+            dto.id = id;
+            await _service.UpdateAsync(dto);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteAsync(id);
+            return Ok();
         }
     }
 

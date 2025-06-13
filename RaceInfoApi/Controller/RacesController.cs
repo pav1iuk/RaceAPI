@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RaceInfoApi.Application.DTOs;
 using RaceInfoApi.Application.Services.Interfaces;
 using RaceInfoApi.Infrastructure.Interfaces;
 
@@ -9,54 +10,39 @@ namespace RaceInfoApi.Controller
     [Route("api/[controller]")]
     public class RacesController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IRaceService _raceService;
-        public RacesController(IUnitOfWork unitOfWork, IRaceService raceService)
+        private readonly IRaceService _service;
+
+        public RacesController(IRaceService service)
         {
-            _unitOfWork = unitOfWork;
-            _raceService = raceService;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var races = await _unitOfWork.Races.GetAllAsync();
-            return Ok(races);
-        }
+        public async Task<IActionResult> GetAll() => Ok(await _service.GetAllAsync());
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var race = await _unitOfWork.Races.GetByIdAsync(id);
-            if (race == null)
-                return NotFound();
+        public async Task<IActionResult> Get(int id) => Ok(await _service.GetByIdAsync(id));
 
-            return Ok(race);
-        }
-        [HttpGet("upcoming")]
-        public async Task<IActionResult> GetUpcoming()
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] RaceDto dto)
         {
-            var races = await _raceService.GetUpcomingRacesAsync();
-            return Ok(races);
+            await _service.CreateAsync(dto);
+            return Ok();
         }
 
-        [HttpGet("past")]
-        public async Task<IActionResult> GetPast()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] RaceDto dto)
         {
-            var races = await _raceService.GetPastRacesAsync();
-            return Ok(races);
+            dto.id = id;
+            await _service.UpdateAsync(dto);
+            return Ok();
         }
 
-        [HttpGet("{id}/details")]
-        public async Task<IActionResult> GetDetails(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var race = await _raceService.GetRaceDetailsAsync(id);
-            if (race == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(race);
+            await _service.DeleteAsync(id);
+            return Ok();
         }
     }
 

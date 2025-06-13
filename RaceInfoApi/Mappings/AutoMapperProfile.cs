@@ -25,6 +25,12 @@
             CreateMap<RaceResult, DriverRaceResultDto>()
                 .ForMember(dest => dest.RaceName, opt => opt.MapFrom(src => src.Race.Name))
                 .ForMember(dest => dest.RaceDate, opt => opt.MapFrom(src => src.Race.Date));
+            CreateMap<RaceResultDto, RaceResult>()
+                .ForMember(dest => dest.Driver, opt => opt.Ignore())
+                .ForMember(dest => dest.Race, opt => opt.Ignore());
+            CreateMap<DriverDto, Driver>().ReverseMap();
+            CreateMap<RaceDto, Race>().ReverseMap();
+
         }
     }
 }
