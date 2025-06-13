@@ -8,7 +8,6 @@ using RaceInfoApi.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Тут реєструємо сервіси
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -18,11 +17,9 @@ builder.Services.AddScoped<IDriverService, DriverService>();
 builder.Services.AddScoped<IRaceResultRepository, RaceResultRepository>();
 builder.Services.AddScoped<IRaceResultService, RaceResultService>();
 
-// Реєстрація DbContext — сюди вставляємо
 builder.Services.AddDbContext<RaceDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Можна додати Swagger, CORS, інші сервіси
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers()
@@ -32,7 +29,6 @@ builder.Services.AddControllers()
     });
 var app = builder.Build();
 
-// Налаштування middleware (приклад для Swagger)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
