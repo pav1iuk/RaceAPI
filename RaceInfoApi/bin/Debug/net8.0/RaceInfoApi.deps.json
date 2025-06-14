@@ -849,6 +849,7 @@
       "RaceInfoApi.Application/1.0.0": {
         "dependencies": {
           "AutoMapper": "12.0.1",
+          "FluentValidation": "11.11.0",
           "RaceInfoApi.Infrastructure": "1.0.0"
         },
         "runtime": {

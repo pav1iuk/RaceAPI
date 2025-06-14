@@ -12,7 +12,7 @@ namespace RaceInfoApi.Application.DTOs
         public int RaceId { get; set; }
         public int DriverId { get; set; }
         public int Position { get; set; }
-        public string? FinishTime { get; set; }
+        public TimeSpan? FinishTime { get; set; }
         public string? BestLapTime { get; set; }
 
         public string? DriverName { get; set; }

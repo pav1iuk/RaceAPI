@@ -52,7 +52,7 @@ namespace RaceInfoApi.Controller
 
         // 🔹 Оновлення запису
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, RaceResultDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] RaceResultDto dto)
         {
             var success = await _service.UpdateAsync(id, dto);
             if (!success)

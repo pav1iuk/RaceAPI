@@ -13,7 +13,6 @@ namespace RaceInfoApi.Application.DTOs
         public string Nationality { get; set; } = null!;
         public string Team { get; set; } = null!;
         public DateTime BirthDate { get; set; }
-        public string FullName { get; set; }
     }
 
 }
