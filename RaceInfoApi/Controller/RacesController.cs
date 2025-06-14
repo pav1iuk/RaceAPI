@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RaceInfoApi.Application.DTOs;
+using RaceInfoApi.Application.Services;
 using RaceInfoApi.Application.Services.Interfaces;
 using RaceInfoApi.Infrastructure.Interfaces;
 
@@ -44,6 +45,14 @@ namespace RaceInfoApi.Controller
             await _service.DeleteAsync(id);
             return Ok();
         }
+
+        [HttpGet("{id}/details")]
+        public async Task<IActionResult> GetRaceDetails(int id)
+        {
+            var race = await _service.GetRaceDetailsAsync(id);
+            return race == null ? NotFound() : Ok(race);
+        }
+
     }
 
 }

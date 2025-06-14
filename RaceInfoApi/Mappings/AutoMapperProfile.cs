@@ -31,6 +31,10 @@
             CreateMap<DriverDto, Driver>().ReverseMap();
             CreateMap<RaceDto, Race>().ReverseMap();
 
+            CreateMap<RaceResult, RaceResultDto>();
+            CreateMap<Driver, DriverDto>();
+
+
         }
     }
 }

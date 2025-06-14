@@ -533,6 +533,29 @@
           }
         }
       }
+    },
+    "/api/Races/{id}/details": {
+      "get": {
+        "tags": [
+          "Races"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -559,6 +582,10 @@
           "birthDate": {
             "type": "string",
             "format": "date-time"
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -592,6 +619,13 @@
           },
           "weather": {
             "type": "string",
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RaceResultDto"
+            },
             "nullable": true
           }
         },
@@ -631,6 +665,9 @@
           "raceName": {
             "type": "string",
             "nullable": true
+          },
+          "driver": {
+            "$ref": "#/components/schemas/DriverDto"
           }
         },
         "additionalProperties": false

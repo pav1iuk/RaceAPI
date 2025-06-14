@@ -321,5 +321,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceInfoApi.Controller.RacesController",
+    "Method": "GetRaceDetails",
+    "RelativePath": "api/Races/{id}/details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
