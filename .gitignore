@@ -1,0 +1,31 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# Database
+*.mdf
+*.ldf
+
+# Rider / JetBrains
+.idea/
+
+# OS specific
+.DS_Store
+Thumbs.db
