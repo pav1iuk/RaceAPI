@@ -1,6 +1,8 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RaceInfoApi.Application.DTOs;
 using RaceInfoApi.Application.Services;
@@ -8,8 +10,7 @@ using RaceInfoApi.Application.Services.Interfaces;
 using RaceInfoApi.Infrastructure.Data;
 using RaceInfoApi.Infrastructure.Interfaces;
 using RaceInfoApi.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using RaceInfoApi.Mappings;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +33,11 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
+});
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -73,6 +78,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<RaceResultDtoValidator>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddAutoMapper(typeof(Program));
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

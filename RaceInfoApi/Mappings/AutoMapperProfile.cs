@@ -8,7 +8,12 @@
     {
         public AutoMapperProfile()
         {
-            CreateMap<Race, RaceDto>();
+            CreateMap<Race, RaceCreateDto>();
+            CreateMap<RaceCreateDto, RaceDto>();
+            CreateMap<RaceCreateDto, Race>()
+    .ForMember(dest => dest.id, opt => opt.Ignore()) 
+    .ForMember(dest => dest.Results, opt => opt.Ignore());
+
 
             CreateMap<Race, RaceDetailsDto>()
                 .ForMember(dest => dest.Results, opt => opt.MapFrom(src => src.Results));
@@ -29,7 +34,9 @@
                 .ForMember(dest => dest.Driver, opt => opt.Ignore())
                 .ForMember(dest => dest.Race, opt => opt.Ignore());
             CreateMap<DriverDto, Driver>().ReverseMap();
-            CreateMap<RaceDto, Race>().ReverseMap();
+
+            CreateMap<Race, RaceDto>();
+            CreateMap<RaceDto, Race>();
 
             CreateMap<RaceResult, RaceResultDto>();
             CreateMap<Driver, DriverDto>();

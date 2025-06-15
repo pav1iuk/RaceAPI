@@ -10,21 +10,24 @@ namespace RaceInfoApi.Application.Services
     using RaceInfoApi.Application.Services.Interfaces;
     using RaceInfoApi.Core.Entities;
     using RaceInfoApi.Infrastructure.Interfaces;
+    using RaceInfoApi.Infrastructure.Repositories;
 
     public class RaceService : IRaceService
     {
+        private readonly IRaceRepository _raceRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public RaceService(IUnitOfWork unitOfWork, IMapper mapper)
+        public RaceService(IUnitOfWork unitOfWork, IMapper mapper, IRaceRepository raceRepository)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _mapper = mapper;            _raceRepository = raceRepository;
+
         }
 
         public async Task<IEnumerable<RaceDto>> GetAllAsync()
         {
-            var races = await _unitOfWork.Races.GetAllAsync();
+            var races = await _raceRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<RaceDto>>(races);
         }
 
@@ -52,11 +55,12 @@ namespace RaceInfoApi.Application.Services
             return _mapper.Map<IEnumerable<RaceDto>>(past);
         }
 
-        public async Task CreateAsync(RaceDto dto)
+        public async Task<RaceDto> CreateAsync(RaceDto dto)
         {
             var race = _mapper.Map<Race>(dto);
-            await _unitOfWork.Races.AddAsync(race);
+            await _raceRepository.AddAsync(race);
             await _unitOfWork.CompleteAsync();
+            return _mapper.Map<RaceDto>(race);
         }
 
         public async Task UpdateAsync(RaceDto dto)

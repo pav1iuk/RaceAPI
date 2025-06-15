@@ -36,6 +36,41 @@
         }
       }
     },
+    "/api/Auth/promote/{userId}": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auth/login": {
       "post": {
         "tags": [
@@ -56,6 +91,37 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenRequestDto"
               }
             }
           }
@@ -502,17 +568,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RaceDto"
+                "$ref": "#/components/schemas/RaceCreateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RaceDto"
+                "$ref": "#/components/schemas/RaceCreateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RaceDto"
+                "$ref": "#/components/schemas/RaceCreateDto"
               }
             }
           }
@@ -674,12 +740,43 @@
         },
         "additionalProperties": false
       },
+      "RaceCreateDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "laps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trackLengthKm": {
+            "type": "number",
+            "format": "double"
+          },
+          "weather": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RaceDto": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "name": {
             "type": "string",
@@ -741,6 +838,7 @@
           },
           "bestLapTime": {
             "type": "string",
+            "format": "date-span",
             "nullable": true
           },
           "driverName": {
@@ -765,6 +863,16 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TokenRequestDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
             "type": "string",
             "nullable": true
           }

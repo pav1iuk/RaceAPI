@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RaceInfoApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78eec99eeebf378580ddcd0fef727ca20240b5ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ce08757c21da6733a77e9bd93c9313529b95e66")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaceInfoApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaceInfoApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

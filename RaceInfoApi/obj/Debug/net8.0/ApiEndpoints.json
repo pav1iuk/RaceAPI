@@ -17,6 +17,48 @@
   },
   {
     "ContainingType": "RaceInfoApi.Controller.AuthController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/Auth/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceInfoApi.Controller.AuthController",
+    "Method": "PromoteToAdmin",
+    "RelativePath": "api/Auth/promote/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceInfoApi.Controller.AuthController",
+    "Method": "Refresh",
+    "RelativePath": "api/Auth/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RaceInfoApi.Application.DTOs.TokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceInfoApi.Controller.AuthController",
     "Method": "Register",
     "RelativePath": "api/Auth/register",
     "HttpMethod": "POST",
@@ -305,7 +347,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "RaceInfoApi.Application.DTOs.RaceDto",
+        "Type": "RaceInfoApi.Application.DTOs.RaceCreateDto",
         "IsRequired": true
       }
     ],
