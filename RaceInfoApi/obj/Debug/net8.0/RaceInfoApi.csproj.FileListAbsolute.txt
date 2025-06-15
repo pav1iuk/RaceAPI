@@ -154,4 +154,5 @@ C:\Users\Pavliuk\source\repos\RaceInfoApi\RaceInfoApi\obj\Debug\net8.0\RaceInfoA
 C:\Users\Pavliuk\source\repos\RaceInfoApi\RaceInfoApi\obj\Debug\net8.0\ref\RaceInfoApi.dll
 C:\Users\Pavliuk\source\repos\RaceInfoApi\RaceInfoApi\bin\Debug\net8.0\RaceInfoApi.Core.dll
 C:\Users\Pavliuk\source\repos\RaceInfoApi\RaceInfoApi\bin\Debug\net8.0\RaceInfoApi.Core.pdb
+C:\Users\Pavliuk\source\repos\RaceInfoApi\RaceInfoApi\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\Pavliuk\source\repos\RaceInfoApi\RaceInfoApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

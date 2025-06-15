@@ -11,6 +11,7 @@ namespace RaceInfoApi.Infrastructure.Data
 {
     public class RaceDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; } = null!;
         public RaceDbContext(DbContextOptions<RaceDbContext> options) : base(options) { }
 
         public DbSet<Race> Races => Set<Race>();
@@ -19,9 +20,17 @@ namespace RaceInfoApi.Infrastructure.Data
             
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new RaceConfiguration());
             modelBuilder.ApplyConfiguration(new DriverConfiguration());
             modelBuilder.ApplyConfiguration(new RaceResultConfiguration());
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                Username = "admin",
+                PasswordHash = "",
+                Role = "Admin"
+            });
             modelBuilder.Entity<RaceResult>(entity =>
             {
                 entity.ToTable("raceresults");

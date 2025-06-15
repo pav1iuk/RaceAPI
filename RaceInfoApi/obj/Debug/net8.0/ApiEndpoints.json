@@ -1,5 +1,47 @@
 [
   {
+    "ContainingType": "RaceInfoApi.Controller.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RaceInfoApi.Application.DTOs.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceInfoApi.Controller.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "RaceInfoApi.Application.DTOs.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RaceInfoApi.Controller.AuthController",
+    "Method": "GetSecret",
+    "RelativePath": "api/Auth/secure",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RaceInfoApi.Controller.DriversController",
     "Method": "GetAll",
     "RelativePath": "api/Drivers",
